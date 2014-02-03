@@ -27,7 +27,27 @@ gulp.task('js', function() {
     .pipe(browserify({
         insertGlobals : true
       , debug : !gutil.env.production
-      })
+      , ready: false
+      , shim: {
+          jquery: {
+            path: 'src/js/lib/jquery.js'
+          , exports: 'jQuery'
+          }
+        , underscore: {
+            path: 'src/js/lib/underscore.js'
+          , exports: '_'
+          }
+        , backbone: {
+            path: 'src/js/lib/backbone.js'
+          , exports: 'Backbone'
+          , depends: { underscore: 'underscore' }
+          }
+        , app: {
+            path: 'src/js/app.js'
+          , exports: 'app'
+          }
+        }
+      }, { require: true })
       .on('error', gutil.log))
     .pipe(gulp.dest('./dist/js/'))
     .pipe(livereload(lr))
@@ -49,4 +69,4 @@ gulp.task('watch', function () {
 })
 
 gulp.task('default', ['css', 'html', 'js'])
-gulp.task('server', ['watch', 'static'])
+gulp.task('server', ['default', 'watch', 'static'])
