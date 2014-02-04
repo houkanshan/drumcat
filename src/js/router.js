@@ -18,6 +18,8 @@ var PageSwitcherModel = Backbone.Model.extend({
   }
 })
 
+var ROOT_PREFIX = '/'
+
 module.exports = Backbone.Router.extend({
   routes: {
     '': 'mainPage'
@@ -26,10 +28,14 @@ module.exports = Backbone.Router.extend({
 
 , initialize: function() {
     this.pageSwitcherModel = new PageSwitcherModel()
-    Backbone.history.start({
-      pushState: true,
-      root: ''
-    })
+
+    $('body').on('click', 'a[data-permalink]', _.bind(function(e) {
+      e.preventDefault()
+      var url = e.target.getAttribute('href').replace(ROOT_PREFIX, '')
+      this.navigate(url, { trigger: true })
+    }, this))
+
+    Backbone.history.start({ pushState: true, root: ROOT_PREFIX })
   }
 
 , switchTo: function(name, Page) {
