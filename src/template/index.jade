@@ -12,6 +12,8 @@ html(lang="en")
 
     link(rel="stylesheet" href="css/index.css")
     link(rel="stylesheet" href="css/mobile.css" media="screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-device-width: 720px)")
+    script
+      var _pageStart = Date.now()
 
   body
     include pages/main
@@ -20,4 +22,4 @@ html(lang="en")
     #setting-layer
 
     script(src="js/main.js")
-    script(src="//localhost:35729/livereload.js?snipver=1")
+    script(src="//#{ip || 'localhost'}:35729/livereload.js?snipver=1")

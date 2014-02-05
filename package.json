@@ -12,7 +12,8 @@
     "gulp-stylus": "~0.0.11",
     "gulp-util": "~2.2.12",
     "gulp-livereload": "~0.2.0",
-    "tiny-lr": "0.0.5"
+    "tiny-lr": "0.0.5",
+    "my-ip": "~1.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

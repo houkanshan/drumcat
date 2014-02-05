@@ -1,0 +1,67 @@
+*
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  -ms-touch-action: none
+  user-select: none
+// layer stack
+.bottom-panel
+.top-panel
+  position: absolute
+  overflow: hidden
+
+.bottom-panel
+  z-index: 10
+
+.top-panel
+  z-index: 20
+
+panelHeight = 124px
+labelHeight = 28px
+numberHeight = panelHeight - labelHeight
+
+.top-panel
+  top: 0
+  bottom: panelHeight
+  left: 0
+  right: 0
+  background: #e8e8e8
+
+.bottom-panel
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background: #F1F1F1
+
+.control-panel
+  height: panelHeight
+  width: 100%
+  position: absolute
+  bottom: 0
+
+.control-panel ul
+  font-size: 0
+  text-align: justify
+
+.control-item
+  text-align: center
+  overflow: hidden
+  font-size: 12px
+  display: inline-block
+  width: (100 / 3)%
+  height: panelHeight
+  box-sizing: content-box
+  .label
+    display: block
+    box-sizing: content-box
+    border-bottom: 1px solid #999
+    margin: 0 4px
+    height: labelHeight
+    line-height: @height
+  .number
+    display: block
+    font-size: 40px
+    height: numberHeight
+    line-height: @height

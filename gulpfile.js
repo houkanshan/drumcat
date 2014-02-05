@@ -14,9 +14,11 @@ gulp.task('css', function () {
 })
 
 var jade = require('gulp-jade')
+var myIp = require('my-ip')
+var config = { locals: { ip: myIp() } }
 gulp.task('html', function() {
   gulp.src('src/template/*.jade')
-    .pipe(jade().on('error', gutil.log))
+    .pipe(jade(config).on('error', gutil.log))
     .pipe(gulp.dest('./dist/'))
     .pipe(livereload(lr))
 })
