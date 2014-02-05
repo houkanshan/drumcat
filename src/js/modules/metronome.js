@@ -17,8 +17,8 @@ module.exports = Backbone.View.extend({
 
 , start: function() {
     if (this.timer) { return }
+    if (!this.schedule) { this.makeSchedule() }
 
-    this.makeSchedule()
     this.tick()
   }
 , tick: function() {
