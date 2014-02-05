@@ -3,6 +3,7 @@ var Backbone = require('backbone')
   , $ = require('jquery')
   , app = require('app')
   , Metronome = require('../modules/metronome')
+  , AudioMaster = require('../modules/audio-master')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -18,11 +19,15 @@ var pageView = Backbone.View.extend({
 , initialize: function() {
     this.metronome = new Metronome()
     this.metronome.start()
+
+    this.audioMaster = new AudioMaster()
+
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
-      this.$el.find('.test-beat').text(kind)
+      this.audioMaster.play(kind)
     }, this)
   }
+
 , updateTempo: function(e) {
     this.metronome.update({ tempo: +this.tempoEl.val() })
   }

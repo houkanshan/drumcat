@@ -42,6 +42,10 @@ gulp.task('js', function() {
           , exports: 'Backbone'
           , depends: { underscore: 'underscore' }
           }
+        , howler: {
+            path: 'src/js/lib/howler.js'
+          , exports: 'Howl'
+          }
         , app: {
             path: 'src/js/app.js'
           , exports: 'app'
@@ -51,6 +55,11 @@ gulp.task('js', function() {
       .on('error', gutil.log))
     .pipe(gulp.dest('./dist/js/'))
     .pipe(livereload(lr))
+})
+
+gulp.task('copy', function() {
+  gulp.src('src/pic/**/*').pipe(gulp.dest('dist/pic/'))
+  gulp.src('src/media/**/*').pipe(gulp.dest('dist/media/'))
 })
 
 var serve = require('gulp-serve')
@@ -68,5 +77,5 @@ gulp.task('watch', function () {
   })
 })
 
-gulp.task('default', ['css', 'html', 'js'])
+gulp.task('default', ['css', 'html', 'js', 'copy'])
 gulp.task('server', ['default', 'watch', 'static'])
