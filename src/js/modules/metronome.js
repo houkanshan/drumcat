@@ -27,7 +27,6 @@ module.exports = Backbone.View.extend({
       // TODO: recover from miss time.
       this.goNextNote()
       this.playNote()
-      this.ticks ++
     }
   }
 , pause: function() {
@@ -45,8 +44,12 @@ module.exports = Backbone.View.extend({
 
 , checkTime: function() {
     var actualRunningTime = Date.now() - this.startDate
-      , theoreRunningTime = this.ticks * this.lookahead
-    return actualRunningTime >= theoreRunningTime
+      , theoreNextNoteTime = this.ticks * this.lookahead
+      , isNextNote  = actualRunningTime >= theoreNextNoteTime
+    if (isNextNote) {
+      this.ticks = actualRunningTime / this.lookahead + 1
+    }
+    return isNextNote
   }
 , goNextNote: function() {
     if (this.currNoteIndex >= this.schedule.length - 1) {
