@@ -1,19 +1,32 @@
+mixin control-button(number)
+  span.btn.plus
+    span.number.reset-leaf= number
+  span.btn.minus
+    span.number.reset-leaf= number
+  span.plus-sign +
+  span.minus-sign -
+
 template#tmpl-main-layout
   .bottom-panel
     .control-panel
       ul
-        li.control-item
+        li.control-item.tempo
           span.label TEMPO
-          span.number 120
-        li.control-item
-          span.label MEASURE
-          span.number 2
-        li.control-item
+          +control-button(120)
+        li.control-item.beats
+          span.label BEATS
+          +control-button(2)
+        li.control-item.subdivision
           span.label SUBDIVIDSION
-          span.number 4
+          +control-button(4)
+
   .top-panel
+    .cat-bg.cat-light
+      span.metronome-leaf
+      span.microphone-leaf
     .cat-container
       img.cat-area(src="pic/octocat.svg")
+
   input(name="tempo" type="number" value="120")
   input(name="beats" type="number" value="2")
   input(name="subdivision" type="number" value="4")

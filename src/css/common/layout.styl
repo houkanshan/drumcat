@@ -1,3 +1,6 @@
+@import 'arkui/mixins'
+@import 'extends'
+
 *
   -webkit-touch-callout: none
   -webkit-user-select: none
@@ -19,15 +22,26 @@
   z-index: 20
 
 panelHeight = 124px
-labelHeight = 28px
+labelHeight = 16px
 numberHeight = panelHeight - labelHeight
+
+colorWhite = #F1F1F1
+colorGray = #e8e8e8
+
+colorBlue = #B8D4EB
+colorGreen = #CBD995
+colorYello = #F8D355
+
+colorPink = #CC3F6C
+colorRed = #F96438
+colorDarkGray = #d5d5d5
 
 .top-panel
   top: 0
   bottom: panelHeight
   left: 0
   right: 0
-  background: #e8e8e8
+  background: colorGray
   //box-shadow: inset 0 0 5px #FFF
 
 .bottom-panel
@@ -35,8 +49,37 @@ numberHeight = panelHeight - labelHeight
   bottom: 0
   left: 0
   right: 0
-  background: #F1F1F1
+  background: colorWhite
 
+// Cat Area
+.cat-container
+  text-align: center
+  height: 100%
+  position: relative
+  .cat-area
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+
+.cat-bg
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  .metronome-leaf
+    @extend $up-leaf
+  .microphone-leaf
+    @extend $down-leaf
+  .color-red
+    background: colorRed
+  .color-pink
+    background: colorPink
+  .color-gray
+    background: colorDarkGray
+
+// Control Panel
 .control-panel
   height: panelHeight
   width: 100%
@@ -48,6 +91,15 @@ numberHeight = panelHeight - labelHeight
   text-align: justify
   //box-shadow: inset 0 -12px 36px #FFF
 
+$sign-icon
+  position: absolute
+  font-size: 16px
+  height: 16px
+  line-height: @height
+  width: @height
+  vertical-align: middle
+  color: #fff
+
 .control-item
   text-align: center
   overflow: hidden
@@ -55,28 +107,41 @@ numberHeight = panelHeight - labelHeight
   display: inline-block
   width: (100 / 3)%
   height: panelHeight
-  box-sizing: content-box
+  box-sizing: border-box
+  position: relative
   .label
-    display: block
-    box-sizing: content-box
-    border-bottom: 1px solid #999
-    margin: 0 4px
+    position: absolute
+    left: 0
+    right: 0
+    font-size: 10px
+    box-sizing: border-box
+    margin: 3px 4px 0
     height: labelHeight
     line-height: @height
+    color: #999
   .number
     display: block
     font-size: 40px
-    height: numberHeight
+    height: panelHeight
     line-height: @height
+  .plus
+    @extend $down-leaf
+  .minus
+    @extend $up-leaf
+  .plus-sign
+    @extend $sign-icon
+    bottom: 5px
+    left: 5px
+  .minus-sign
+    @extend $sign-icon
+    line-height: 10px
+    right: 5px
+    top: 5px
 
-.cat-container
-  text-align: center
-  height: 100%
-  position: relative
-  .cat-area
-    position: absolute
-    top: 50%
-    left: 50%
-    -webkit-transform: translate(-50%,-50%)
-    -ms-transform: translate(-50%,-50%)
-    transform: translate(-50%,-50%)
+.tempo .btn:hover
+  background-color: rgba(colorBlue, 0.2)
+.beats .btn:hover
+  background-color: rgba(colorGreen, 0.2)
+.subdivision .btn:hover
+  background-color: rgba(colorYello, 0.2)
+

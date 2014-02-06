@@ -4,6 +4,7 @@ var Backbone = require('backbone')
   , app = require('app')
   , Metronome = require('../modules/metronome')
   , AudioMaster = require('../modules/audio-master')
+  , LightMaster = require('../modules/light-master')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -24,10 +25,12 @@ var pageView = Backbone.View.extend({
     this.start()
 
     this.audioMaster = new AudioMaster()
+    this.lightMaster = new LightMaster()
 
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
       this.audioMaster.play(kind)
+      this.lightMaster.play(kind)
     }, this)
   }
 , toggle: function() {
@@ -58,6 +61,8 @@ var pageView = Backbone.View.extend({
     this.tempoEl = this.$('[name=tempo]')
     this.beatsEl = this.$('[name=beats]')
     this.subdivisionEl = this.$('[name=subdivision]')
+
+    this.lightMaster.render()
 
     return this
   }
