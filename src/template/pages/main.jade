@@ -12,10 +12,11 @@ template#tmpl-main-layout
           span.label SUBDIVIDSION
           span.number 4
   .top-panel
+    .cat-container
+      img.cat-area(src="pic/octocat.svg")
   input(name="tempo" type="number" value="120")
   input(name="beats" type="number" value="2")
   input(name="subdivision" type="number" value="4")
   a.setting(href="/setting" data-permalink) setting
   button(name="start") start
-  button(name="pause") pause
   button(name="stop") stop

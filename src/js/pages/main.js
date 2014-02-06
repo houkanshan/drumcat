@@ -16,7 +16,7 @@ var pageView = Backbone.View.extend({
   , 'change [name=beats]': 'updateBeats'
   , 'change [name=subdivision]': 'updateSubdivision'
   , 'click [name=start]': 'start'
-  , 'click [name=pause]': 'pause'
+  , 'click .cat-area': 'toggle'
   , 'click [name=stop]': 'stop'
   }
 , initialize: function() {
@@ -29,6 +29,9 @@ var pageView = Backbone.View.extend({
       if (!this.rendered) { return }
       this.audioMaster.play(kind)
     }, this)
+  }
+, toggle: function() {
+    this.metronome.toggle()
   }
 , start: function() {
     this.metronome.start()

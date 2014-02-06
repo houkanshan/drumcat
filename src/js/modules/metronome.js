@@ -29,6 +29,12 @@ module.exports = Backbone.View.extend({
       this.playNote()
     }
   }
+, isPlaying: function() {
+    return !!this.timer
+  }
+, toggle: function() {
+    this[this.isPlaying() ? 'pause' : 'start']()
+  }
 , pause: function() {
     clearTimeout(this.timer)
     this.timer = null
