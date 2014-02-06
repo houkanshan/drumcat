@@ -10,13 +10,13 @@ template#tmpl-main-layout
   .bottom-panel
     .control-panel
       ul
-        li.control-item.tempo
+        li.control-item.tempo(data-name="tempo")
           span.label TEMPO
           +control-button(120)
-        li.control-item.beats
+        li.control-item.beats(data-name="beats")
           span.label BEATS
           +control-button(2)
-        li.control-item.subdivision
+        li.control-item.subdivision(data-name="subdivision")
           span.label SUBDIVIDSION
           +control-button(4)
 
@@ -27,9 +27,11 @@ template#tmpl-main-layout
     .cat-container
       img.cat-area(src="pic/octocat.svg")
 
-  input(name="tempo" type="number" value="120")
-  input(name="beats" type="number" value="2")
-  input(name="subdivision" type="number" value="4")
+  .setting-model
+    input(name="tempo" type="number" value="120" min=20 max=300)
+    input(name="beats" type="number" value="2" min=1 max=6)
+    input(name="subdivision" type="number" value="4" min=1 max=16)
+
   a.setting(href="/setting" data-permalink) setting
   button(name="start") start
   button(name="stop") stop

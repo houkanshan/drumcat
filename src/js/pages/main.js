@@ -19,6 +19,8 @@ var pageView = Backbone.View.extend({
   , 'click [name=start]': 'start'
   , 'click .cat-area': 'toggle'
   , 'click [name=stop]': 'stop'
+  , 'click .plus': 'plusSetting'
+  , 'click .minus': 'minusSetting'
   }
 , initialize: function() {
     this.metronome = new Metronome()
@@ -45,15 +47,36 @@ var pageView = Backbone.View.extend({
 , stop: function() {
     this.metronome.stop()
   }
+, plusSetting: function(e) {
+    var settingName = $(e.target).closest('.control-item').data('name')
+      , settingModel = this[settingName+'El']
+      , max = settingModel.attr('max')
+      , res = +settingModel.val() + 1
+    //settingModel[0].stepUp() // should be better
+    if (res > max) { return }
+    settingModel.val(res).trigger('change')
+  }
+, minusSetting: function(e) {
+    var settingName = $(e.target).closest('.control-item').data('name')
+      , settingModel = this[settingName+'El']
+      , min = settingModel.attr('min')
+      , res = +settingModel.val() - 1
+    //settingModel[0].stepDown() // should be better
+    if (res < min) { return }
+    settingModel.val(res).change()
+  }
 
 , updateTempo: function(e) {
-    this.metronome.update({ tempo: +this.tempoEl.val() })
+    var value = +this.tempoEl.val()
+    this.metronome.update({ tempo: value })
   }
 , updateBeats: function(e) {
-    this.metronome.update({ beats: +this.beatsEl.val() })
+    var value = +this.beatsEl.val()
+    this.metronome.update({ beats: value })
   }
 , updateSubdivision: function(e) {
-    this.metronome.update({ subdivision: +this.subdivisionEl.val() })
+    var value = +this.subdivisionEl.val()
+    this.metronome.update({ subdivision: value })
   }
 , render: function() {
     this.rendered = true
