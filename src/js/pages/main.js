@@ -5,6 +5,7 @@ var Backbone = require('backbone')
   , Metronome = require('../modules/metronome')
   , AudioMaster = require('../modules/audio-master')
   , LightMaster = require('../modules/light-master')
+  , ControlButtons = require('../modules/control-buttons')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -28,6 +29,7 @@ var pageView = Backbone.View.extend({
 
     this.audioMaster = new AudioMaster()
     this.lightMaster = new LightMaster()
+    this.controlButtons = new ControlButtons()
 
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
@@ -47,37 +49,23 @@ var pageView = Backbone.View.extend({
 , stop: function() {
     this.metronome.stop()
   }
-, plusSetting: function(e) {
-    var settingName = $(e.target).closest('.control-item').data('name')
-      , settingModel = this[settingName+'El']
-      , max = settingModel.attr('max')
-      , res = +settingModel.val() + 1
-    //settingModel[0].stepUp() // should be better
-    if (res > max) { return }
-    settingModel.val(res).trigger('change')
-  }
-, minusSetting: function(e) {
-    var settingName = $(e.target).closest('.control-item').data('name')
-      , settingModel = this[settingName+'El']
-      , min = settingModel.attr('min')
-      , res = +settingModel.val() - 1
-    //settingModel[0].stepDown() // should be better
-    if (res < min) { return }
-    settingModel.val(res).change()
-  }
 
 , updateTempo: function(e) {
     var value = +this.tempoEl.val()
     this.metronome.update({ tempo: value })
+    this.controlButtons.update({ tempo: value })
   }
 , updateBeats: function(e) {
     var value = +this.beatsEl.val()
     this.metronome.update({ beats: value })
+    this.controlButtons.update({ beats: value })
   }
 , updateSubdivision: function(e) {
     var value = +this.subdivisionEl.val()
     this.metronome.update({ subdivision: value })
+    this.controlButtons.update({ subdivision: value })
   }
+
 , render: function() {
     this.rendered = true
     this.$el.html(_.template(this.tmpl))
@@ -86,6 +74,11 @@ var pageView = Backbone.View.extend({
     this.subdivisionEl = this.$('[name=subdivision]')
 
     this.lightMaster.render()
+    this.controlButtons.render({ settingModels: {
+      tempo: this.tempoEl
+    , beats: this.beatsEl
+    , subdivision: this.subdivisionEl
+    } })
 
     return this
   }
