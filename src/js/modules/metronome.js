@@ -18,6 +18,7 @@ module.exports = Backbone.View.extend({
 , start: function() {
     if (this.timer) { return }
     if (!this.schedule) { this.makeSchedule() }
+    this.currNoteIndex = 0
 
     this.tick()
   }
@@ -79,7 +80,6 @@ module.exports = Backbone.View.extend({
       }
     }
     console.log(this.schedule, this.lookahead)
-    this.currNoteIndex = 0
     this.startDate = Date.now()
     this.ticks = 0
   }
