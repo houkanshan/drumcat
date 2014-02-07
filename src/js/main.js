@@ -23,6 +23,10 @@ body.on('touchstart', 'a', function(e) {
   })
 })
 
+body.on('touchmove', function(e) {
+  e.preventDefault()
+})
+
 if (! 'ontouchstart' in window) {
   body.on('click', function(e) {
     $(e.target).trigger('tap')
