@@ -20,8 +20,6 @@ var pageView = Backbone.View.extend({
   , 'click [name=start]': 'start'
   , 'click .cat-area': 'toggle'
   , 'click [name=stop]': 'stop'
-  , 'click .plus': 'plusSetting'
-  , 'click .minus': 'minusSetting'
   }
 , initialize: function() {
     this.metronome = new Metronome()

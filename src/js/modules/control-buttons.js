@@ -24,10 +24,16 @@ module.exports = Backbone.View.extend({
     return this
   }
 
-, update: function(options) {
+, update: function(data) {
     if (!this.rendered) { return }
-    _.each(options, function(value, key) {
-      this[key + 'Number'].text(value)
+    _.each(data, function(value, key) {
+      var elem = this[key + 'Number']
+        , oldValue = elem.data('value')
+        , changeOrder = value > oldValue ? [0, 1] : [1, 0]
+      elem.eq(changeOrder[0]).text(value).data('value', value)
+      setTimeout(function() {
+        elem.eq(changeOrder[1]).text(value).data('value', value)
+      }, 100)
     }, this)
   }
 
@@ -36,19 +42,25 @@ module.exports = Backbone.View.extend({
     var settingName = $(e.target).closest('.control-item').data('name')
       , settingModel = this.settingModels[settingName]
       , max = settingModel.attr('max')
-      , res = +settingModel.val() + 1
+      , value = +settingModel.val()
+      , res = value + 1
     //settingModel[0].stepUp() // should be better
     if (res > max) { return }
-    settingModel.val(res).trigger('change')
+    settingModel
+      .val(res).data('old', value)
+      .trigger('change')
   }
 , minusSetting: function(e) {
     if (!this.rendered) { return }
     var settingName = $(e.target).closest('.control-item').data('name')
       , settingModel = this.settingModels[settingName]
       , min = settingModel.attr('min')
-      , res = +settingModel.val() - 1
+      , value = +settingModel.val()
+      , res = value - 1
     //settingModel[0].stepDown() // should be better
     if (res < min) { return }
-    settingModel.val(res).change()
+    settingModel
+      .val(res).data('old', value)
+      .change()
   }
 })

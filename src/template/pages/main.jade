@@ -1,12 +1,12 @@
 mixin control-button(number)
   span.btn.plus
-    span.number.reset-leaf= number
+    span.number.reset-leaf(data-value=number)= number
   span.btn.minus
-    span.number.reset-leaf= number
+    span.number.reset-leaf(data-value=number)= number
   span.plus-sign +
   span.minus-sign -
 
-template#tmpl-main-layout
+script#tmpl-main-layout(type="text/template")
   .bottom-panel
     .control-panel
       ul
