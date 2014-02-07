@@ -21,5 +21,8 @@ body.on('touchstart', 'a', function(e) {
     target.off('.touch-hover')
   })
 })
+body.on('click', function(e) {
+  $(e.target).trigger('tap')
+})
 
 app.router = new Router()
