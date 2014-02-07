@@ -1,0 +1,20 @@
+@import 'arkui/mixins'
+@import 'common/variable'
+@import 'extends'
+
+.cat-light
+  .metronome-leaf
+    @extend $up-leaf
+  .microphone-leaf
+    @extend $down-leaf
+  .color-red
+    background: colorRed
+  .color-pink
+    background: colorPink
+  .color-gray
+    background: colorDarkGray
+
+.scoreboard
+  .number
+    font-size: 114px
+    color: rgba(#999, 0.5)

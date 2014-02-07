@@ -13,16 +13,20 @@ body.on('click', 'a[href="#"]', function(e) {
 })
 body.on('touchstart', 'a', function(e) {
   var target = $(e.currentTarget)
-  console.log(target)
   target.addClass('hover')
   target.on('touchend.touch-hover touchcancel.touch-hover'
   , function() {
-    target.removeClass('hover')
-    target.off('.touch-hover')
+    setTimeout(function() {
+      target.removeClass('hover')
+      target.off('.touch-hover')
+    }, 200)
   })
 })
-body.on('click', function(e) {
-  $(e.target).trigger('tap')
-})
+
+if (! 'ontouchstart' in window) {
+  body.on('click', function(e) {
+    $(e.target).trigger('tap')
+  })
+}
 
 app.router = new Router()

@@ -21,9 +21,15 @@ script#tmpl-main-layout(type="text/template")
           +control-button(4)
 
   .top-panel
-    .cat-bg.cat-light
-      span.metronome-leaf
-      span.microphone-leaf
+    .cat-bg
+      .cat-light
+        .metronome-leaf
+        .microphone-leaf
+      .scoreboard
+        .metronome-score
+          span.number 121
+        .microphone-score
+          span.number 34
     .cat-container
       img.cat-area(src="pic/octocat.svg")
 

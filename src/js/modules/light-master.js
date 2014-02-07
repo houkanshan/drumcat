@@ -10,7 +10,11 @@ var lights = [{
 }]
 
 module.exports = Backbone.View.extend({
-  initialize: function() {
+  events: {
+    'doubleTap .metronome-leaf': 'resetTickCount'
+  , 'doubleTap .microphone-leaf': 'resetMatchCount'
+  }
+, initialize: function() {
   }
 , render: function() {
     this.setElement('.cat-light')
