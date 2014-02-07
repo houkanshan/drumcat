@@ -3,13 +3,12 @@ var Backbone = require('backbone')
   , $ = require('jquery')
   , app = require('app')
   , Metronome = require('../modules/metronome')
-  , AudioMaster = require('../modules/audio-master')
-  , LightMaster = require('../modules/light-master')
+  , arktouch = require('arktouch')
 
 module.exports = Backbone.View.extend({
   events: {
-    'click .plus': 'plusSetting'
-  , 'click .minus': 'minusSetting'
+    'tap .plus': 'plusSetting'
+  , 'tap .minus': 'minusSetting'
   }
 
 , render: function(data) {

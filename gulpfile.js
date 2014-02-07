@@ -44,6 +44,10 @@ gulp.task('js', function() {
           , exports: 'Backbone'
           , depends: { underscore: 'underscore' }
           }
+        , arktouch: {
+            path: 'src/js/lib/arktouch.js'
+          , exports: 'globalTouch'
+          }
         , howler: {
             path: 'src/js/lib/howler.js'
           , exports: 'Howl'

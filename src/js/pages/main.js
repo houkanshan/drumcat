@@ -6,6 +6,7 @@ var Backbone = require('backbone')
   , AudioMaster = require('../modules/audio-master')
   , LightMaster = require('../modules/light-master')
   , ControlButtons = require('../modules/control-buttons')
+  , arktouch = require('arktouch')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -18,7 +19,7 @@ var pageView = Backbone.View.extend({
   , 'change [name=beats]': 'updateBeats'
   , 'change [name=subdivision]': 'updateSubdivision'
   , 'click [name=start]': 'start'
-  , 'click .cat-area': 'toggle'
+  , 'tap .cat-area': 'toggle'
   , 'click [name=stop]': 'stop'
   }
 , initialize: function() {
