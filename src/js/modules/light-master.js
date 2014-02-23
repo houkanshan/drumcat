@@ -36,9 +36,16 @@ module.exports = Backbone.View.extend({
         this[name + 'Number'].text(value || '')
       }, this)
     })
+
+    this.listenTo(this.scoreModel, 'microphone:matched?', function(matched) {
+      var index = matched ? 1 : 3
+      this.flash(index, 'microphone')
+    }, this)
   }
 , play: function(index, key) {
-    this.flash(index, key)
+    if (key === 'metronome') {
+      this.flash(index, key)
+    }
     this.score(index, key)
   }
 , flash: function(index, key) {

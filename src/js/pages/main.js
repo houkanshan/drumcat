@@ -41,9 +41,10 @@ var pageView = Backbone.View.extend({
     this.listenTo(this.kicks, 'kick:bang', function() {
       if (!this.rendered) { return }
       console.info('bang')
-      this.lightMaster.play(3, 'microphone')
+      this.lightMaster.play(null, 'microphone') // shit interface.
     })
   }
+
 , toggle: function() {
     this.metronome.toggle()
   }
