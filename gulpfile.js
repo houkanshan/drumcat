@@ -71,7 +71,7 @@ gulp.task('copy', function() {
 var serve = require('gulp-serve')
 gulp.task('static', serve({
   root: 'dist'
-, port: '8080'
+, port: '8081'
 }))
 
 gulp.task('watch', function () {

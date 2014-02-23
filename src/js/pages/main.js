@@ -2,11 +2,12 @@ var Backbone = require('backbone')
   , _ = require('underscore')
   , $ = require('jquery')
   , app = require('app')
+  , arktouch = require('arktouch')
   , Metronome = require('../modules/metronome')
   , AudioMaster = require('../modules/audio-master')
   , LightMaster = require('../modules/light-master')
   , ControlButtons = require('../modules/control-buttons')
-  , arktouch = require('arktouch')
+  , Kicks = require('../modules/kicks')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -24,17 +25,24 @@ var pageView = Backbone.View.extend({
   }
 , initialize: function() {
     this.metronome = new Metronome()
-    this.start()
 
     this.audioMaster = new AudioMaster()
     this.lightMaster = new LightMaster()
     this.controlButtons = new ControlButtons()
+    this.kicks = new Kicks()
+    this.kicks.capture()
 
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
-      this.audioMaster.play(kind)
-      this.lightMaster.play(kind)
+      this.audioMaster.play(kind, 'metronome')
+      this.lightMaster.play(kind, 'metronome')
     }, this)
+
+    this.listenTo(this.kicks, 'kick:bang', function() {
+      if (!this.rendered) { return }
+      console.log('bang')
+      this.lightMaster.play(3, 'microphone')
+    })
   }
 , toggle: function() {
     this.metronome.toggle()

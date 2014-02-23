@@ -8,6 +8,8 @@ var lights = [{
   name: 'pink'
 }, {
   name: 'pink'
+}, {
+  name: 'red'
 }]
 
 module.exports = Backbone.View.extend({
@@ -22,6 +24,7 @@ module.exports = Backbone.View.extend({
     this.setElement('.cat-bg')
     this.metronomeEl = this.$('.metronome-leaf')
     this.metronomeNumber = this.$('.metronome-score .number')
+    this.microphoneEl = this.$('.microphone-leaf')
     this.microphoneNumber = this.$('.microphone-score .number')
     return this
   }
@@ -34,19 +37,20 @@ module.exports = Backbone.View.extend({
       }, this)
     })
   }
-, play: function(index) {
-    this.flash(index)
-    this.score(index)
+, play: function(index, key) {
+    this.flash(index, key)
+    this.score(index, key)
   }
-, flash: function(index) {
-    var className = 'color-' + lights[index].name
+, flash: function(index, key) {
+    var className = 'color-' + lights[index || 0].name
+      , leafEl = this[key + 'El']
 
-    this.metronomeEl.addClass(className)
+    leafEl.addClass(className)
     setTimeout(_.bind(function() {
-      this.metronomeEl.removeClass(className)
+      leafEl.removeClass(className)
     }, this), 100)
   }
-, score: function(index) {
-    this.scoreModel.stepUp('metronome')
+, score: function(index, key) {
+    this.scoreModel.stepUp(key)
   }
 })
