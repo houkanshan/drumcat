@@ -40,7 +40,7 @@ var pageView = Backbone.View.extend({
 
     this.listenTo(this.kicks, 'kick:bang', function() {
       if (!this.rendered) { return }
-      console.log('bang')
+      console.info('bang')
       this.lightMaster.play(3, 'microphone')
     })
   }

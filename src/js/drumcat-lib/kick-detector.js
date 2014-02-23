@@ -8,7 +8,7 @@ function addAll(array) {
 
 function KickDetector(options) {
   options = options || {}
-  this.timeWindow = options.timeWindow || 100
+  this.loudnessThreshold = 0.8
   this.kickCount = 0
   this.initLast()
 }
@@ -23,7 +23,7 @@ fn.update = function(dt) {
   var array = this.array
     , total = addAll(array) * 100
 
-  if (total < 1) {
+  if (total < this.loudnessThreshold) {
     this.initLast()
     return
   }
@@ -33,10 +33,14 @@ fn.update = function(dt) {
     return
   }
 
-  this.isUp = total > this.lastTotal
-
-  if (!this.isUp && this.wasUp) {
+  if (!this.kicking) {
     this.kicked = true
+    this.kicking = true
+  }
+
+  this.isUp = total > this.lastTotal
+  if (!this.isUp && this.wasUp) {
+    this.kicking = false
   }
 
   this.wasUp = this.isUp
@@ -45,20 +49,15 @@ fn.update = function(dt) {
 
 fn.initLast = function() {
   this.wasUp = true // init
-  this.lastTotal = 1
+  this.lastTotal = this.loudnessThreshold
+  this.kicked = false
+  this.kicking = false
 }
 
 fn.draw = function() {
-  if (this.kicked && !this.windowOpen) {
-    this.windowOpen = true
-
+  if (this.kicked) {
     this.kickCount += 1
-
-    setTimeout(function() {
-      this.windowOpen = false
-      this.kicked = false
-    }.bind(this), this.timeWindow)
-
+    this.kicked = false
     return true
   }
   return false
