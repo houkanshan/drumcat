@@ -49,6 +49,14 @@ var pageView = Backbone.View.extend({
       console.info('bang')
       this.lightMaster.play(null, 'microphone') // shit interface.
     })
+
+    this.listenTo(this.metronome, 'note:next', function(kind, nextDelay) {
+      this.cat.startKick(400)
+    }, this)
+
+    this.listenTo(this.metronome, 'schedule:maked', function() {
+      this.cat.cancelKick()
+    }, this)
   }
 
 , toggle: function() {

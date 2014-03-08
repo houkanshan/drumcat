@@ -52,6 +52,10 @@ fn.startKick = function(lastTime) {
   this.stepDelay = lastTime / this.loopOrder.length
 }
 
+fn.cancelKick = function() {
+  this.initData()
+}
+
 fn.draw = function() {}
 
 module.exports = Cat

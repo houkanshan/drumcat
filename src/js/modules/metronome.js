@@ -59,14 +59,20 @@ module.exports = Backbone.View.extend({
     return isNextNote
   }
 , goNextNote: function() {
-    if (this.currNoteIndex >= this.schedule.length - 1) {
-      this.currNoteIndex = 0
-    } else {
-      this.currNoteIndex ++
-    }
+    this.currNoteIndex ++
+    this.currNoteIndex %= this.schedule.length
   }
 , playNote: function() {
     this.trigger('note:play', this.currNote())
+
+    var nextDelay = this.lookahead
+    this.trigger('note:next', this.nextNode(), nextDelay)
+  }
+, currNote: function() {
+    return this.schedule[this.currNoteIndex]
+  }
+, nextNode: function() {
+    return this.schedule[(this.currNoteIndex + 1) % this.schedule.length]
   }
 , currNote: function() {
     return this.schedule[this.currNoteIndex]
@@ -82,5 +88,7 @@ module.exports = Backbone.View.extend({
     console.log(this.schedule, this.lookahead)
     this.startDate = Date.now()
     this.ticks = 0
+
+    this.trigger('schedule:maked', this.schedule)
   }
 })

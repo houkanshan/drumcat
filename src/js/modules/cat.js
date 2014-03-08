@@ -28,6 +28,9 @@ module.exports = Backbone.View.extend({
   }
 
 , startKick: function() {
-    this.cat.startKick()
+    return this.cat.startKick.apply(this.cat, arguments)
+  }
+, cancelKick: function() {
+    return this.cat.cancelKick.apply(this.cat, arguments)
   }
 })
