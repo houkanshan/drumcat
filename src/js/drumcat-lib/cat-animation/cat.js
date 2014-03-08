@@ -15,9 +15,11 @@ for(var i = 0, ilen = imageCount; i < ilen; i++) {
   }
 })
 
+var loopOrder = imageIndexArr.reverse().concat([2, 4, 6, 8, 10, 12, 14])
+
 function Cat() {
   this.imageSets = new ImageSets({ images: imageData })
-  this.loopOrder = imageIndexArr.concat(imageIndexArr.slice(1, -1).reverse())
+  this.loopOrder = loopOrder
   this.initData()
 }
 var fn = Cat.prototype
@@ -46,10 +48,10 @@ fn.getImage = function() {
   return image.image
 }
 
-fn.startKick = function(lastTime) {
-  lastTime = lastTime || 400
+fn.startKick = function(nextDelay) {
+  nextDelay = nextDelay || 400
   this.doingKick = true
-  this.stepDelay = lastTime / this.loopOrder.length
+  this.stepDelay = nextDelay / this.loopOrder.length
 }
 
 fn.cancelKick = function() {
