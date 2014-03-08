@@ -8,6 +8,7 @@ var Backbone = require('backbone')
   , LightMaster = require('../modules/light-master')
   , ControlButtons = require('../modules/control-buttons')
   , Kicks = require('../modules/kicks')
+  , Cat = require('../modules/cat')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -27,10 +28,15 @@ var pageView = Backbone.View.extend({
     this.metronome = new Metronome()
 
     this.audioMaster = new AudioMaster()
+
     this.lightMaster = new LightMaster()
+
     this.controlButtons = new ControlButtons()
+
     this.kicks = new Kicks()
     this.kicks.capture()
+
+    this.cat = new Cat()
 
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
@@ -81,7 +87,10 @@ var pageView = Backbone.View.extend({
     this.beatsEl = this.$('[name=beats]')
     this.subdivisionEl = this.$('[name=subdivision]')
 
+    this.cat.render()
+
     this.lightMaster.render()
+
     this.controlButtons.render({ settingModels: {
       tempo: this.tempoEl
     , beats: this.beatsEl
