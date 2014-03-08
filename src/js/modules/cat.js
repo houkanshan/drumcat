@@ -26,4 +26,8 @@ module.exports = Backbone.View.extend({
 
     this.mainloop.start()
   }
+
+, startKick: function() {
+    this.cat.startKick()
+  }
 })

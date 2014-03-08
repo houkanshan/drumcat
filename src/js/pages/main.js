@@ -21,7 +21,7 @@ var pageView = Backbone.View.extend({
   , 'change [name=beats]': 'updateBeats'
   , 'change [name=subdivision]': 'updateSubdivision'
   , 'click [name=start]': 'start'
-  , 'tap .cat-area': 'toggle'
+  , 'tap .cat-container': 'toggle'
   , 'click [name=stop]': 'stop'
   }
 , initialize: function() {
