@@ -52,6 +52,14 @@ MainLoop.prototype = {
     this.preDraw()
 
     this.spirits.forEach(function(spirit, i) {
+      if (spirit._data.waiting) {
+        spirit._data.waiting -= dt
+        if (spirit._data.waiting <= 0) {
+          delete spirit._data.waiting
+        } else {
+          return
+        }
+      }
       spirit.update(dt)
       spirit.draw()
     })
@@ -68,10 +76,14 @@ MainLoop.prototype = {
       origDestroy.apply(this, arguments)
     }
 
+    spirit._data = {}
     spirits.push(spirit)
   }
 , resetSpirit: function() {
     this.spirits = []
+  }
+, wait: function(spirit, ms) {
+    spirits._data.waiting = ms
   }
 }
 

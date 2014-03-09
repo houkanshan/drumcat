@@ -19,6 +19,7 @@ var loopOrder = imageIndexArr.slice().reverse().concat([2, 4, 6, 8, 10, 12, 14])
 
 var readyOrder = imageIndexArr.slice()
 
+
 function Cat() {
   this.imageSets = new ImageSets({ images: imageData })
   this.loopOrder = readyOrder
@@ -27,7 +28,11 @@ function Cat() {
 }
 var fn = Cat.prototype
 
+fn.maxActTime = 500
+
 fn.update = function(dt) {
+  if (this.isWaiting(dt)) { return }
+
   if (!this.doingKick) {
     this.currIndex = 0
     return
@@ -56,11 +61,38 @@ fn.getImage = function() {
 }
 
 fn.startKick = function(nextDelay) {
-  this.loopOrder = loopOrder
   nextDelay = nextDelay || 400
+
+  if (this.delayTooLong(nextDelay)) {
+    this.wait(nextDelay - this.maxActTime)
+    nextDelay = this.maxActTime
+  }
+
+  this.loopOrder = loopOrder
   this.countDelay(nextDelay)
   this.doingKick = true
   this.timeStep = 0
+}
+
+fn.wait = function(ms) {
+  this.waiting = ms
+}
+
+fn.isWaiting = function(dt) {
+  if (this.waiting) {
+    this.waiting -= dt
+    if (this.waiting > 0) {
+      return true
+    } else {
+      delete this.waiting
+      return false
+    }
+  }
+  return false
+}
+
+fn.delayTooLong = function(delay) {
+  return delay > this.maxActTime
 }
 
 fn.countDelay = function(nextDelay) {
