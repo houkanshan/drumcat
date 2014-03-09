@@ -18,7 +18,7 @@ script#tmpl-main-layout(type="text/template")
           +control-button(2)
         li.control-item.subdivision(data-name="subdivision")
           span.label SUBDIVIDSION
-          +control-button(4)
+          +control-button(2)
 
   .top-panel
     .cat-bg
@@ -36,7 +36,7 @@ script#tmpl-main-layout(type="text/template")
   .setting-model
     input(name="tempo" type="number" value="120" min=20 max=300)
     input(name="beats" type="number" value="2" min=1 max=6)
-    input(name="subdivision" type="number" value="4" min=1 max=16)
+    input(name="subdivision" type="number" value="2" min=1 max=16)
 
   a.setting(href="/setting" data-permalink) setting
   button(name="start") start

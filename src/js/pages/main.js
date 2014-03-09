@@ -8,7 +8,7 @@ var Backbone = require('backbone')
   , LightMaster = require('../modules/light-master')
   , ControlButtons = require('../modules/control-buttons')
   , Kicks = require('../modules/kicks')
-  , Cat = require('../modules/cat')
+  , CatPuppet = require('../modules/cat')
 
 var pageModel = Backbone.Model.extend({
 })
@@ -36,7 +36,7 @@ var pageView = Backbone.View.extend({
     this.kicks = new Kicks()
     this.kicks.capture()
 
-    this.cat = new Cat()
+    this.catPuppet = new CatPuppet()
 
     this.listenTo(this.metronome, 'note:play', function(kind) {
       if (!this.rendered) { return }
@@ -50,11 +50,11 @@ var pageView = Backbone.View.extend({
     })
 
     this.listenTo(this.metronome, 'note:next', function(kind, nextDelay) {
-      this.cat.startKick(nextDelay)
+      this.catPuppet.cat.startKick(nextDelay)
     }, this)
 
     this.listenTo(this.metronome, 'schedule:maked', function() {
-      this.cat.cancelKick()
+      this.catPuppet.cat.cancelKick()
     }, this)
   }
 
@@ -94,7 +94,8 @@ var pageView = Backbone.View.extend({
     this.beatsEl = this.$('[name=beats]')
     this.subdivisionEl = this.$('[name=subdivision]')
 
-    this.cat.render()
+    this.catPuppet.render()
+    this.catPuppet.cat.goReady()
 
     this.lightMaster.render()
 

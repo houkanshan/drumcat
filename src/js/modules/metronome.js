@@ -4,7 +4,7 @@ var Backbone = require('backbone')
 var defaults = {
   tempo: 120
 , beats: 2
-, subdivision: 4
+, subdivision: 2
 }
 
 module.exports = Backbone.View.extend({
