@@ -18,7 +18,7 @@ var PageSwitcherModel = Backbone.Model.extend({
   }
 })
 
-var ROOT_PREFIX = '/'
+var ROOT_PREFIX = window.location.pathname
 
 module.exports = Backbone.Router.extend({
   routes: {
