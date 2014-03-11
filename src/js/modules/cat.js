@@ -24,7 +24,9 @@ module.exports = Backbone.View.extend({
       layer.clearLayer()
     }
 
-    this.mainloop.start()
+    this.cat.onready = function() {
+      this.mainloop.start()
+    }.bind(this)
   }
 
 , startKick: function() {

@@ -22,6 +22,10 @@ var readyOrder = imageIndexArr.slice()
 
 function Cat() {
   this.imageSets = new ImageSets({ images: imageData })
+  this.imageSets.onready = function() {
+    this.onready()
+  }.bind(this)
+
   this.loopOrder = readyOrder
   this.initData()
   this.goRest()
