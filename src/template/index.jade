@@ -16,14 +16,14 @@ html(lang="en")
       var _pageStart = Date.now()
 
   body
-    script.
-      if(!navigator.getUserMedia) {
-        document.body.innerText = 'Unsupported browser.'
-      }
     include pages/main
     #main-layer
 
     #setting-layer
 
     script(src="js/main.js")
+    script.
+      if (!navigator.getUserMedia) {
+        window.document.body.innerText = 'Unsupported browser.'
+      }
     //-script(src="//#{ip || 'localhost'}:35729/livereload.js?snipver=1")
