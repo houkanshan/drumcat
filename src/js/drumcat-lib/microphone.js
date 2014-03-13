@@ -44,9 +44,11 @@ fn.filterNoise = function() {
 }
 
 fn.capture = function() {
-  navigator.getUserMedia({
-    audio: true
-  }, success.bind(this), error.bind(this))
+  try {
+    navigator.getUserMedia({
+      audio: true
+    }, success.bind(this), error.bind(this))
+  } catch(e) { }
 
   function success(stream) {
     this.stream = stream
