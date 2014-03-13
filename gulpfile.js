@@ -28,7 +28,7 @@ gulp.task('js', function() {
   gulp.src('src/js/main.js')
     .pipe(browserify({
         insertGlobals : true
-      , debug : !gutil.env.production
+      , debug : false
       , ready: false
       , shim: {
           jquery: {
