@@ -30,11 +30,16 @@ module.exports = Backbone.View.extend({
   }
 , initModel: function() {
     this.scoreModel = new ScoreModel()
+    this.firstChanged = false
     this.listenTo(this.scoreModel, 'change', function(model) {
       var changed = model.changed
       _.each(changed, function(value, name) {
-        this[name + 'Number'].text(value || '')
+        this[name + 'Number'].text(value || 0)
       }, this)
+      if (!this.firstChanged) {
+        this.firstChanged = true
+        this.microphoneNumber.text(0)
+      }
     })
 
     this.listenTo(this.scoreModel, 'microphone:matched?', function(matched) {
