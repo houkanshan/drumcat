@@ -1,0 +1,27 @@
+{
+    "name": "DrumCat 鼓猫",
+    "main": "index.html",
+    "description": "A metronome.",
+    "version": "0.0.1",
+    "no-edit-menu": true,
+    "window": {
+      "show": true,
+      "toolbar": false,
+      "frame": true,
+      "position": "center",
+      "width": 320,
+      "height": 568,
+      "min_width": 320,
+      "min_height": 568
+    },
+    "maintainers":[{
+      "name": "Houkanshan",
+      "email": "houkanshan@gmail.com",
+      "web": "http://houkanshan.github.io"
+    }],
+    "repositories": [{
+        "type": "git", 
+        "url": "http://github.com/houkanshan/drumcat.git",
+        "path": "."
+    }]
+}
