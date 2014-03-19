@@ -30,6 +30,7 @@ gulp.task('js', function() {
         insertGlobals : true
       , debug : false
       , ready: false
+      , builtins: false
       , shim: {
           jquery: {
             path: 'src/js/lib/jquery.js'
