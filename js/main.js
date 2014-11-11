@@ -1803,7 +1803,7 @@ fn.addAnalyser = function() {
 module.exports = Microphone
 
 },{"__browserify_Buffer":2,"__browserify_process":1}],11:[function(require,module,exports){
-var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},Buffer=require("__browserify_Buffer"),__filename="/fake_7dcf68d5.js",__dirname="/";var Router = require('./router')
+var process=require("__browserify_process"),global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},Buffer=require("__browserify_Buffer"),__filename="/fake_c03fe5c2.js",__dirname="/";var Router = require('./router')
   , app = require('./app')
   , $ = require('jquery')
   , Backbone = require('backbone')
